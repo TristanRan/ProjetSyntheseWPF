@@ -1,0 +1,62 @@
+﻿<Window
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ProjetSyntheseWPF"
+      xmlns:SalariesDll="clr-namespace:SalariesDll;assembly=UtilisateursDLL" x:Class="ProjetSyntheseWPF.AddCommercial"
+      mc:Ignorable="d" 
+      d:DesignHeight="450"
+      Title="AddCommercial" Height="460" Width="747.882">
+
+    <Window.Resources>
+        <Style x:Key="textBoxInError" TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip"
+                        Value="{Binding (Validation.Errors)[0].ErrorContent, RelativeSource={x:Static RelativeSource.Self}}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <SalariesDll:Commercial x:Key="newCommercial" />
+        <Style x:Key="DtInError" TargetType="{x:Type DatePicker}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip"
+                        Value="{Binding (Validation.Errors)[0].ErrorContent, RelativeSource={x:Static RelativeSource.Self}}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid Background="White" HorizontalAlignment="Left" Width="748">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="65*"/>
+            <RowDefinition Height="0*"/>
+            <RowDefinition Height="354*"/>
+        </Grid.RowDefinitions>
+
+        <Label Width="286" VerticalContentAlignment="Center" VerticalAlignment="Top" Margin="218,0,244,0" HorizontalContentAlignment="Center" HorizontalAlignment="Center" FontSize="16" FontWeight="Bold" Content="Ajout d'un nouveau Commercial" Height="31"/>
+        <Label Width="91" VerticalAlignment="Top" Margin="11,56,0,0" HorizontalAlignment="Left" Content="Date Naissance" Grid.Row="2" Height="26"/>
+        <Label Width="158" VerticalContentAlignment="Center" VerticalAlignment="Top" Margin="284,31,306,0" Height="29" HorizontalContentAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Content="Informations générales"/>
+        <Label Width="210" VerticalContentAlignment="Center" VerticalAlignment="Top" Margin="249,109,289,0" Height="29" HorizontalContentAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Content="Informations professionelles" Grid.Row="2"/>
+        <Label Width="65" VerticalAlignment="Top" Margin="10,1,0,0" HorizontalAlignment="Left" Content="Id(unique)" Grid.Row="2" Height="26"/>
+        <Label Width="65" VerticalAlignment="Top" Margin="276,4,0,0" HorizontalAlignment="Left" Content="Nom" Grid.Row="2" Height="26"/>
+        <Label Width="65" VerticalAlignment="Top" Margin="497,4,0,0" HorizontalAlignment="Left" Content="Prénom" Grid.Row="2" Height="26"/>
+        <TextBox Validation.Error="Erreur_Validation"  x:Name="txtBoxId" Width="120" VerticalAlignment="Top" TextWrapping="Wrap" Style="{StaticResource textBoxInError}" Margin="95,4,0,0" Height="23" HorizontalAlignment="Left" Grid.Row="2" Text="{Binding  Mode=TwoWay, Source={StaticResource newCommercial}, Path=Matricule, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, NotifyOnValidationError=True}"/>
+        <TextBox Validation.Error="Erreur_Validation"  x:Name="txtBoxName" Width="120" VerticalAlignment="Top" Text="{Binding  Mode=TwoWay, Source={StaticResource newCommercial}, Path=Nom, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, NotifyOnValidationError=True}" TextWrapping="Wrap" Style="{StaticResource textBoxInError}" Margin="331,4,0,0" Height="23" HorizontalAlignment="Left" Grid.Row="2"/>
+        <TextBox Validation.Error="Erreur_Validation"  x:Name="txtBoxPrenom" Width="120" VerticalAlignment="Top" Text="{Binding  Mode=TwoWay, Source={StaticResource newCommercial}, Path=Prenom, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, NotifyOnValidationError=True}" TextWrapping="Wrap" Style="{StaticResource textBoxInError}" RenderTransformOrigin="0.458,-0.71" Margin="562,7,0,0" Height="23" HorizontalAlignment="Left" Grid.Row="2"/>
+        <Label Width="73" VerticalAlignment="Top" Margin="64,167,0,0" HorizontalAlignment="Left" Content="Salaire brut" Grid.Row="2" Height="26"/>
+        <Label Width="65" VerticalAlignment="Top" Margin="389,167,0,0" HorizontalAlignment="Left" Content="Taux CS" Grid.Row="2" Height="26"/>
+        <TextBox Validation.Error="Erreur_Validation"  x:Name="txtBoxSalaireBrut" Width="120" VerticalAlignment="Top" Text="{Binding  Mode=TwoWay, Source={StaticResource newCommercial}, Path=SalaireBrut, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, NotifyOnValidationError=True}" TextWrapping="Wrap" Style="{StaticResource textBoxInError}" Margin="155,167,0,0" Height="23" HorizontalAlignment="Left" Grid.Row="2"/>
+        <TextBox Validation.Error="Erreur_Validation"  x:Name="txtBoxTauxCs" Width="120" VerticalAlignment="Top" Text="{Binding  Mode=TwoWay, Source={StaticResource newCommercial}, Path=TauxCS, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True}" TextWrapping="Wrap" Style="{StaticResource textBoxInError}" Margin="463,170,0,0" Height="23" HorizontalAlignment="Left" Grid.Row="2"/>
+        <Button x:Name="btnAddSalarieToList" Width="87" VerticalAlignment="Top" RenderTransformOrigin="0.335,-2.711" Margin="234,320,0,0" IsDefault="True" Height="30" HorizontalAlignment="Left" Content="Valider" Click="btnAddSalarieToList_Click" Grid.Row="2"/>
+        <Button x:Name="btnAnnulerAdd" Width="87" VerticalAlignment="Top" Margin="364,320,0,0" IsCancel="True" Height="30" HorizontalAlignment="Left" Content="Annuler" Click="btnAnnulerAdd_Click" RenderTransformOrigin="0.194,5.197" Grid.Row="2"/>
+        <DatePicker x:Name="dpDateNaissance" VerticalAlignment="Top" SelectedDateFormat="Short" Style="{StaticResource DtInError}" Margin="107,56,0,0" HorizontalAlignment="Left"  RenderTransformOrigin="1.187,0.408" Grid.Row="2" SelectedDate="{Binding Source={StaticResource newCommercial}, Path=DateNaissance, Mode=OneWay, ValidatesOnExceptions=True, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True}" Height="24" Width="140" DisplayDate="1990-01-01" DisplayDateStart="1900-01-01"/>
+        <Label Width="102" VerticalAlignment="Top" Margin="64,238,0,0" HorizontalAlignment="Left" Content="Chiffre Affaire" Grid.Row="2" Height="26"/>
+        <Label Width="65" VerticalAlignment="Top" Margin="389,238,0,0" HorizontalAlignment="Left" Content="Comission" Grid.Row="2" Height="26"/>
+        <TextBox Validation.Error="Erreur_Validation"  x:Name="txtBoxCA" Width="120" VerticalAlignment="Top" Text="{Binding  Mode=TwoWay, Source={StaticResource newCommercial}, Path=ChiffreAffaire, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True, NotifyOnValidationError=True}" TextWrapping="Wrap" Style="{StaticResource textBoxInError}" Margin="155,238,0,0" Height="23" HorizontalAlignment="Left" Grid.Row="2"/>
+        <TextBox Validation.Error="Erreur_Validation"  x:Name="txtBoxComission" Width="120" VerticalAlignment="Top" Text="{Binding Mode=TwoWay, Source={StaticResource newCommercial}, Path=Commission, UpdateSourceTrigger=LostFocus, ValidatesOnExceptions=True}" TextWrapping="Wrap" Style="{StaticResource textBoxInError}" Margin="463,242,0,0" Height="23" HorizontalAlignment="Left" Grid.Row="2"/>
+
+    </Grid>
+</Window>
