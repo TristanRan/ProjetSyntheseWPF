@@ -47,7 +47,7 @@ namespace ProjetSyntheseWPF
             listUsers.Add(new Utilisateur("bb0000bb", "Machin", "11111"));
             ran.Role = admin;
 
-            Salarie tri = new Salarie("Ranchon", "Tristan", "11aaa22");
+            Salarie tri = new Salarie("Ranchon", "Michel", "11aaa22");
             tri.Poste = "Salarie";
             listSalaries.Add(tri);
 
